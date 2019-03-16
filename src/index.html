@@ -4,9 +4,22 @@
         <title>Charts</title>
         <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
         <script type="text/javascript" src="index.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
         <canvas id="graph" width="1000" height="300">
         </canvas>
+
+        <div class="block">
+          <canvas id="res" width="1000" height="70"></canvas>
+
+          <div class='resizable' id='shit'>
+            <div class='resizers'>
+              <div class='resizer bottom-left'></div>
+              <div class='resizer bottom-right'></div>
+            </div>
+          </div>
+        </div>
+
     </body>
 </html>
