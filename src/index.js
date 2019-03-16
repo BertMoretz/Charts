@@ -68,7 +68,7 @@ function dragElement(elmnt) {
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
-  
+
     // get the mouse cursor position at startup:
     pos2 = e.clientX;
     // pos4 = e.clientY;
@@ -80,14 +80,15 @@ function dragElement(elmnt) {
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
-    // calculate the new cursor position:
 
     pos1 = pos2 - e.clientX;
-
     pos2 = e.clientX;
 
-    // set the element's new position:
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    // boundary checker
+    if ((elmnt.offsetLeft - pos1) > boundary.offset().left && ((elmnt.offsetLeft - pos1) + elmnt.offsetWidth <  boundary.width() )) {
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
   }
 
   function closeDragElement() {
