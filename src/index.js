@@ -178,7 +178,7 @@ function drawGraph() {
   var startPoint = parseInt(tg[0].columns[1].length*(chartPlace/graph.width()),10);
   var endPoint = (tg[0].columns[1].length*(chartWidth/graph.width()));
   //console.log(tg[0].columns[1].length*(chartWidth/graph.width()));
-  for(var i = 1; i < endPoint; i+=10) {
+  for(var i = 1; i < endPoint; i+=Math.floor(chartWidth/100)) {
     var date = new Date(tg[0].columns[0][i+startPoint]);
     c.fillText(date.toDateString().substring(3,10), getXPixel(i, graph), graph.height() - yPadding + 20);
   }
@@ -186,6 +186,7 @@ function drawGraph() {
   c.textAlign = "right"
   c.textBaseline = "middle";
 
+  //Math.floor(getMaxY()/5) + 10 -  Math.floor(getMaxY()/5) % 10
   for(var i = 0; i < getMaxY(); i += 50) {
       c.fillText(i, xPadding - 10, getYPixel(i, graph));
   }
