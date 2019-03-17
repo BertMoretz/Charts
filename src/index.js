@@ -43,14 +43,19 @@ function makeResizableDiv(div) {
         const width = original_width + (e.pageX - original_mouse_x);
         if (width > minimum_size) {
           element.style.width = width + 'px'
+          chartWidth = width;
+          drawGraph();
         }
 
       }
       else if (currentResizer.classList.contains('bottom-left')) {
         const width = original_width - (e.pageX - original_mouse_x)
         if (width > minimum_size) {
-          element.style.width = width + 'px'
-          element.style.left = original_x + (e.pageX - original_mouse_x) + 'px'
+          element.style.width = width + 'px';
+          // chartWidth = width;
+          element.style.left = original_x + (e.pageX - original_mouse_x) + 'px';
+          chartPlace = original_x + (e.pageX - original_mouse_x);
+          drawGraph();
         }
       }
     }
@@ -96,6 +101,9 @@ function dragElement(elmnt) {
     // boundary checker
     if ((elmnt.offsetLeft - pos1) > boundary.offset().left && ((elmnt.offsetLeft - pos1) + elmnt.offsetWidth <  boundary.width() )) {
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        chartPlace = (elmnt.offsetLeft - pos1);
+        //console.log(chartPlace);
+        drawGraph();
     }
 
   }
@@ -130,9 +138,10 @@ function getYPixel(val, graph) {
     return graph.height() - (((graph.height() - yPadding) / getMaxY()) * val) - yPadding;
 }
 
-$(document).ready(function() {
+function drawGraph() {
   graph = $('#graph');
   var c = graph[0].getContext('2d');
+  c.clearRect(0, 0, 1000, 300);
 
   c.lineWidth = 2;
   c.strokeStyle = '#333';
@@ -145,7 +154,10 @@ $(document).ready(function() {
   c.lineTo(graph.width(), graph.height() - yPadding);
   c.stroke();
 
-  for(var i = 1; i < tg[0].columns[1].length; i+=10) {
+  var startPoint = parseInt(tg[0].columns[1].length*(chartPlace/graph.width()),10);
+  var endPoint = startPoint + (tg[0].columns[1].length*(chartWidth/graph.width()));
+  //console.log(tg[0].columns[1].length*(chartWidth/graph.width()));
+  for(var i = startPoint; i < endPoint; i+=10) {
     var date = new Date(tg[0].columns[0][i]);
     c.fillText(date.toDateString().substring(3,10), getXPixel(i, graph), graph.height() - yPadding + 20);
   }
@@ -161,7 +173,9 @@ $(document).ready(function() {
   c.beginPath();
   c.moveTo(getXPixel(0, graph), getYPixel(tg[0].columns[1][1], graph));
 
-  for(var i = 1; i < tg[0].columns[1].length; i ++) {
+  console.log(parseInt(tg[0].columns[1].length*(chartPlace/graph.width()),10));
+//  console.log(chartPlace);
+  for(var i = startPoint; i < endPoint; i ++) {
       c.lineTo(getXPixel(i, graph), getYPixel(tg[0].columns[1][i], graph));
   }
   c.stroke();
@@ -170,12 +184,16 @@ $(document).ready(function() {
   c.beginPath();
   c.moveTo(getXPixel(0, graph), getYPixel(tg[0].columns[2][1], graph));
 
-  for(var i = 1; i < tg[0].columns[1].length; i ++) {
+  for(var i = startPoint; i < endPoint; i ++) {
       c.lineTo(getXPixel(i, graph), getYPixel(tg[0].columns[2][i], graph));
   }
   c.stroke();
 
+}
 
+$(document).ready(function() {
+
+  drawGraph();
 
   res = $('#res');
   var r = res[0].getContext('2d');
