@@ -33,8 +33,15 @@
   background-color: transparent;
 }
 
-#shit {
+#move {
   cursor: move;
+}
+
+#moveitem {
+  width: 100px;
+  height: 60px;
+  position: absolute;
+  z-index: 1;
 }
 
 .resizable .resizers{
@@ -52,16 +59,15 @@
   border: 2px solid #383838;
   border-radius: 3px;
   position: absolute;
-
 }
 
 .resizable .resizers .resizer.bottom-left {
-  left: -5px;
+  left: -10px;
   bottom: -2px;
   cursor: ew-resize;
 }
 .resizable .resizers .resizer.bottom-right {
-  right: -5px;
+  right: -10px;
   bottom: -2px;
   cursor: ew-resize;
 }

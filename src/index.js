@@ -3,6 +3,9 @@ var res;
 var xPadding = 30;
 var yPadding = 30;
 
+var chartWidth = 100;
+var chartPlace = 0;
+
 var data = { values:[
         { X: "Jan", Y: 12 },
         { X: "Feb", Y: 28 },
@@ -63,7 +66,13 @@ function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0;
   var boundary = $('.block');
 
-  elmnt.onmousedown = dragMouseDown;
+  if (document.getElementById(elmnt.id + "item")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "item").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
 
   function dragMouseDown(e) {
     e = e || window.event;
@@ -97,8 +106,6 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-
-
 
 
 
@@ -192,5 +199,5 @@ $(document).ready(function() {
   r.stroke();
 
   makeResizableDiv('.resizable');
-  dragElement(document.getElementById("shit"));
+  dragElement(document.getElementById("move"));
 });
