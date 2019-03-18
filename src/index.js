@@ -21,6 +21,7 @@ var tg = [
 function makeResizableDiv(div) {
   const element = document.querySelector(div);
   const resizers = document.querySelectorAll(div + ' .resizer')
+  var boundary = $('.block');
   const minimum_size = 20;
   let original_width = 0;
   let original_x = 0;
@@ -40,14 +41,17 @@ function makeResizableDiv(div) {
 
     function resize(e) {
       if (currentResizer.classList.contains('bottom-right')) {
+        if(element.offsetLeft + element.offsetWidth <  boundary.width() || e.pageX < original_mouse_x) {
         const width = original_width + (e.pageX - original_mouse_x);
         if (width > minimum_size) {
-          element.style.width = width + 'px';
-          document.getElementById("moveitem").style.width = width + 'px';
-          chartWidth = width;
-          drawGraph();
-        }
 
+            element.style.width = width + 'px';
+            document.getElementById("moveitem").style.width = width + 'px';
+            chartWidth = width;
+            drawGraph();
+
+        }
+      }
       }
       else if (currentResizer.classList.contains('bottom-left')) {
         const width = original_width - (e.pageX - original_mouse_x)
@@ -129,7 +133,7 @@ function getMaxY() {
     }
   }
 
-  max += 10 - max % 10; //round max number
+  //max += 10 - max % 10; //round max number
   return max;
 }
 
@@ -178,7 +182,7 @@ function drawGraph() {
   var startPoint = parseInt(tg[0].columns[1].length*(chartPlace/graph.width()),10);
   var endPoint = (tg[0].columns[1].length*(chartWidth/graph.width()));
   //console.log(tg[0].columns[1].length*(chartWidth/graph.width()));
-  for(var i = 1; i < endPoint; i+=Math.floor(chartWidth/100)) {
+  for(var i = 1; i < endPoint; i+= (Math.floor(chartWidth/100) < 1? 1: Math.floor(chartWidth/100))) {
     var date = new Date(tg[0].columns[0][i+startPoint]);
     c.fillText(date.toDateString().substring(3,10), getXPixel(i, graph), graph.height() - yPadding + 20);
   }
@@ -187,7 +191,7 @@ function drawGraph() {
   c.textBaseline = "middle";
 
   //Math.floor(getMaxY()/5) + 10 -  Math.floor(getMaxY()/5) % 10
-  for(var i = 0; i < getMaxY(); i += 50) {
+  for(var i = 0; i < getMaxY(); i += Math.floor(getMaxY()/5) + 10 -  Math.floor(getMaxY()/5) % 10) {
       c.fillText(i, xPadding - 10, getYPixel(i, graph));
   }
 
@@ -197,7 +201,7 @@ function drawGraph() {
 
 //  console.log(parseInt(tg[0].columns[1].length*(chartPlace/graph.width()),10));
 //  console.log(chartPlace);
-  for(var i = 1; i < endPoint; i ++) {
+  for(var i = 1; i < endPoint+1; i ++) {
       c.lineTo(getXPixel(i, graph), getYPixel(tg[0].columns[1][i+startPoint], graph));
   }
   c.stroke();
@@ -206,7 +210,7 @@ function drawGraph() {
   c.beginPath();
   c.moveTo(getXPixel(0, graph), getYPixel(tg[0].columns[2][startPoint], graph));
 
-  for(var i = 1; i < endPoint; i ++) {
+  for(var i = 1; i < endPoint+1; i ++) {
       c.lineTo(getXPixel(i, graph), getYPixel(tg[0].columns[2][i+startPoint], graph));
   }
   c.stroke();
