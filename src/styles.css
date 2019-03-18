@@ -1,6 +1,7 @@
 .block {
   position: relative;
   width: 1000px;
+  height: 100px;
 }
 
 #res {
@@ -70,4 +71,8 @@
   right: -10px;
   bottom: -2px;
   cursor: ew-resize;
+}
+
+.checks {
+
 }
