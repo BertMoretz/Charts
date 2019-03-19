@@ -125,14 +125,17 @@ function dragElement(elmnt, index) {
 
 function getMaxY(index) {
   var max = 0;
-  var startPoint = parseInt(tg[index].columns[1].length*(chartPlace/graph.width()),10);
-  var endPoint = (tg[index].columns[1].length*(chartWidth/graph.width()));
-  for(var i = 1; i < endPoint; i ++) {
-      //console.log(tg[0].columns[1][i]);
-    if(tg[index].columns[1][i+startPoint] > max) {
-      max = tg[index].columns[1][i+startPoint];
+  for (var j=1; j < Object.keys(tg[index].columns).length; j++) {
+    var startPoint = parseInt(tg[index].columns[j].length*(chartPlace/graph.width()),10);
+    var endPoint = (tg[index].columns[j].length*(chartWidth/graph.width()));
+    for(var i = 1; i < endPoint; i ++) {
+        //console.log(tg[0].columns[1][i]);
+      if(tg[index].columns[j][i+startPoint] > max) {
+        max = tg[index].columns[j][i+startPoint];
+      }
     }
   }
+
 
   //max += 10 - max % 10; //round max number
   return max;
