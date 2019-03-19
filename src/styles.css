@@ -76,3 +76,13 @@
 .checks {
 
 }
+
+.chbox {
+  border-radius: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid black;
+  display: inline;
+}

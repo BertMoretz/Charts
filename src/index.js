@@ -3,8 +3,8 @@ var res;
 var xPadding = 30;
 var yPadding = 30;
 
-var chartWidth = 100;
-var chartPlace = 10;
+var chartWidth = [100,100,100,100,100];
+var chartPlace = [10,10,10,10,10];
 
 var data = { values:[
         { X: "Jan", Y: 12 },
@@ -48,7 +48,7 @@ function makeResizableDiv(div, index) {
 
             element.style.width = width + 'px';
             document.getElementById("moveitem").style.width = width + 'px';
-            chartWidth = width;
+            chartWidth[index] = width;
             drawGraph(index);
 
         }
@@ -59,9 +59,9 @@ function makeResizableDiv(div, index) {
         if (width > minimum_size) {
           element.style.width = width + 'px';
           document.getElementById("moveitem").style.width = width + 'px';
-          chartWidth = width;
+          chartWidth[index] = width;
           element.style.left = original_x + (e.pageX - original_mouse_x) + 'px';
-          chartPlace = original_x + (e.pageX - original_mouse_x);
+          chartPlace[index] = original_x + (e.pageX - original_mouse_x);
           drawGraph(index);
         }
       }
@@ -108,7 +108,7 @@ function dragElement(elmnt, index) {
     // boundary checker
     if ((elmnt.offsetLeft - pos1) > boundary.offset().left && ((elmnt.offsetLeft - pos1) + elmnt.offsetWidth <  boundary.width() )) {
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-        chartPlace = (elmnt.offsetLeft - pos1);
+        chartPlace[index] = (elmnt.offsetLeft - pos1);
         //console.log(chartPlace);
         drawGraph(index);
     }
@@ -126,8 +126,8 @@ function dragElement(elmnt, index) {
 function getMaxY(index) {
   var max = 0;
   for (var j=1; j < Object.keys(tg[index].columns).length; j++) {
-    var startPoint = parseInt(tg[index].columns[j].length*(chartPlace/graph.width()),10);
-    var endPoint = (tg[index].columns[j].length*(chartWidth/graph.width()));
+    var startPoint = parseInt(tg[index].columns[j].length*(chartPlace[index]/graph.width()),10);
+    var endPoint = (tg[index].columns[j].length*(chartWidth[index]/graph.width()));
     for(var i = 1; i < endPoint; i ++) {
         //console.log(tg[0].columns[1][i]);
       if(tg[index].columns[j][i+startPoint] > max) {
@@ -142,7 +142,7 @@ function getMaxY(index) {
 }
 
 function getXPixel(val, graph, index) {
-    return ((graph.width() - xPadding) / (tg[index].columns[1].length*(chartWidth/graph.width()))) * (val) + (xPadding * 1.5);
+    return ((graph.width() - xPadding) / (tg[index].columns[1].length*(chartWidth[index]/graph.width()))) * (val) + (xPadding * 1.5);
 }
 
 function getYPixel(val, graph, index) {
@@ -182,10 +182,10 @@ function drawGraph(index) {
   c.lineTo(graph.width(), graph.height() - yPadding);
   c.stroke();
 
-  var startPoint = parseInt(tg[index].columns[1].length*(chartPlace/graph.width()),10);
-  var endPoint = (tg[index].columns[1].length*(chartWidth/graph.width()));
+  var startPoint = parseInt(tg[index].columns[1].length*(chartPlace[index]/graph.width()),10);
+  var endPoint = (tg[index].columns[1].length*(chartWidth[index]/graph.width()));
   //console.log(tg[0].columns[1].length*(chartWidth/graph.width()));
-  for(var i = 1; i < endPoint; i+= (Math.floor(chartWidth/100) < 1? 1: Math.floor(chartWidth/100))) {
+  for(var i = 1; i < endPoint; i+= (Math.floor(chartWidth[index]/100) < 1? 1: Math.floor(chartWidth[index]/100))) {
     var date = new Date(tg[index].columns[0][i+startPoint]);
     c.fillText(date.toDateString().substring(3,10), getXPixel(i, graph, index), graph.height() - yPadding + 20);
   }
@@ -226,34 +226,28 @@ function check (id) {
 
 }
 
-function uncheck (id) {
+function drawMiniature(index) {
+  res = $('#res');
+  var r = res[0].getContext('2d');
+
+  for (var j = 0; j<tg[index].columns.length-1; j++) {
+    r.strokeStyle = tg[index].colors["y" + j];
+    r.beginPath();
+    r.moveTo(getXmini(0, res), getYMini(tg[index].columns[j+1][1], res));
+
+    for(var i = 1; i < tg[index].columns[j].length; i ++) {
+        r.lineTo(getXmini(i, res), getYMini(tg[index].columns[j+1][i], res));
+    }
+    r.stroke();
+  }
 
 }
+
 
 $(document).ready(function() {
 
   drawGraph(0);
-
-  res = $('#res');
-  var r = res[0].getContext('2d');
-
-  r.strokeStyle = tg[0].colors.y0;
-  r.beginPath();
-  r.moveTo(getXmini(0, res), getYMini(tg[0].columns[1][1], res));
-
-  for(var i = 1; i < tg[0].columns[1].length; i ++) {
-      r.lineTo(getXmini(i, res), getYMini(tg[0].columns[1][i], res));
-  }
-  r.stroke();
-
-  r.strokeStyle = tg[0].colors.y1;
-  r.beginPath();
-  r.moveTo(getXmini(0, res), getYMini(tg[0].columns[2][1], res));
-
-  for(var i = 1; i < tg[0].columns[1].length; i ++) {
-      r.lineTo(getXmini(i, res), getYMini(tg[0].columns[2][i], res));
-  }
-  r.stroke();
+  drawMiniature(0);
 
   makeResizableDiv('.resizable', 0);
   dragElement(document.getElementById("move"), 0);
