@@ -8,14 +8,13 @@
     </head>
     <body>
       <div class="first">
-
         <canvas id="graph" width="1000" height="300">
         </canvas>
 
         <div class="block">
-          <canvas id="res" width="1000" height="70"></canvas>
-          <div class='resizable' id='move'>
-            <div id='moveitem'></div>
+          <canvas class="mini" id="res" width="1000" height="70"></canvas>
+          <div class='resizable' id='move0'>
+            <div class="moveitem" id='move0item'></div>
             <div class='resizers' >
               <div class='resizer bottom-left'></div>
               <div class='resizer bottom-right'></div>
@@ -24,14 +23,133 @@
         </div>
 
         <div class="chbox">
-          <input type="checkbox" id="joined" name="joined" onclick="check('joined', 0, 0, '#graph', '#res');"
+          <input type="checkbox" id="0y0" name="0y0" onclick="check('0y0', 0, 0, '#graph', '#res');"
                  checked>
-          <label for="joined">Joined</label>
+          <label for="0y0">y0</label>
         </div>
 
         <div class="chbox">
-          <input type="checkbox" id="left" name="left" onclick="check('left', 0, 1, '#graph', '#res');" checked>
-          <label for="left">Left</label>
+          <input type="checkbox" id="0y1" name="0y1" onclick="check('0y1', 0, 1, '#graph', '#res');" checked>
+          <label for="0y1">y1</label>
+        </div>
+      </div>
+
+      <div class="second">
+        <canvas id="graph1" width="1000" height="300">
+        </canvas>
+
+        <div class="block">
+          <canvas class="mini" id="res1" width="1000" height="70"></canvas>
+          <div class='resizable' id='move1'>
+            <div class="moveitem" id='move1item'></div>
+            <div class='resizers' >
+              <div class='resizer bottom-left'></div>
+              <div class='resizer bottom-right'></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="1y0" name="1y0" onclick="check('1y0', 1, 0, '#graph1', '#res1');"
+                 checked>
+          <label for="1y0">y0</label>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="1y1" name="1y1" onclick="check('1y1', 1, 1, '#graph1', '#res1');" checked>
+          <label for="1y1">y1</label>
+        </div>
+      </div>
+
+      <div class="third">
+        <canvas id="graph2" width="1000" height="300">
+        </canvas>
+
+        <div class="block">
+          <canvas class="mini" id="res2" width="1000" height="70"></canvas>
+          <div class='resizable' id='move2'>
+            <div class="moveitem" id='move2item'></div>
+            <div class='resizers' >
+              <div class='resizer bottom-left'></div>
+              <div class='resizer bottom-right'></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="2y0" name="2y0" onclick="check('2y0', 2, 0, '#graph2', '#res2');"
+                 checked>
+          <label for="2y0">y0</label>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="2y1" name="2y1" onclick="check('2y1', 2, 1, '#graph2', '#res2');" checked>
+          <label for="2y1">y1</label>
+        </div>
+      </div>
+
+      <div class="fourth">
+        <canvas id="graph3" width="1000" height="300">
+        </canvas>
+
+        <div class="block">
+          <canvas class="mini" id="res3" width="1000" height="70"></canvas>
+          <div class='resizable' id='move3'>
+            <div class="moveitem" id='move3item'></div>
+            <div class='resizers' >
+              <div class='resizer bottom-left'></div>
+              <div class='resizer bottom-right'></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="3y0" name="3y0" onclick="check('3y0', 3, 0, '#graph3', '#res3');"
+                 checked>
+          <label for="3y0">y0</label>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="3y1" name="3y1" onclick="check('3y1', 3, 1, '#graph3', '#res3');" checked>
+          <label for="3y1">y1</label>
+        </div>
+      </div>
+
+      <div class="fifth">
+        <canvas id="graph4" width="1000" height="300">
+        </canvas>
+
+        <div class="block">
+          <canvas class="mini" id="res4" width="1000" height="70"></canvas>
+          <div class='resizable' id='move4'>
+            <div class="moveitem" id='move4item'></div>
+            <div class='resizers' >
+              <div class='resizer bottom-left'></div>
+              <div class='resizer bottom-right'></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="4y0" name="4y0" onclick="check('4y0', 4, 0, '#graph4', '#res4');"
+                 checked>
+          <label for="4y0">y0</label>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="4y1" name="4y1" onclick="check('4y1', 4, 1, '#graph4', '#res4');" checked>
+          <label for="4y1">y1</label>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="4y2" name="4y2" onclick="check('4y2', 4, 2, '#graph4', '#res4');"
+                 checked>
+          <label for="4y2">y2</label>
+        </div>
+
+        <div class="chbox">
+          <input type="checkbox" id="4y3" name="4y3" onclick="check('4y3', 4, 3, '#graph4', '#res4');" checked>
+          <label for="4y3">y3</label>
         </div>
       </div>
     </body>

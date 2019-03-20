@@ -4,7 +4,7 @@
   height: 100px;
 }
 
-#res {
+.mini {
   position: absolute;
 }
 
@@ -15,13 +15,14 @@
   position: absolute;
   left: 40px;
   background-color: transparent;
+  cursor: move;
 }
 
 #move {
   cursor: move;
 }
 
-#moveitem {
+.moveitem {
   width: 100px;
   height: 60px;
   position: absolute;
