@@ -8,23 +8,6 @@
   position: absolute;
 }
 
-.hey {
-  background-color: black;
-  position: absolute;
-  height: 100px;
-  width: 1000px;
-  opacity: 0.2;
-}
-
-.link {
-  background-color: transparent;
-  height: 100px;
-  width: 100px;
-  resize: horizontal;
-  position: absolute;
-  border: 1px solid black;
-}
-
 .resizable {
   background: white;
   width: 100px;
@@ -73,16 +56,13 @@
   cursor: ew-resize;
 }
 
-.checks {
-
-}
-
 .chbox {
   border-radius: 25px;
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid black;
+  border: 1px solid #e6ecf0;
   display: inline;
+  margin-left: 10px;
 }

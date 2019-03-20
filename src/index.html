@@ -7,13 +7,13 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
+      <div class="first">
+
         <canvas id="graph" width="1000" height="300">
         </canvas>
 
-
         <div class="block">
           <canvas id="res" width="1000" height="70"></canvas>
-
           <div class='resizable' id='move'>
             <div id='moveitem'></div>
             <div class='resizers' >
@@ -23,15 +23,14 @@
           </div>
         </div>
 
-        <div class="checks">
         <div class="chbox">
-          <input type="checkbox" id="joined" name="joined" onclick="check('joined');"
+          <input type="checkbox" id="joined" name="joined" onclick="check('joined', 0, 0, '#graph', '#res');"
                  checked>
           <label for="joined">Joined</label>
         </div>
 
         <div class="chbox">
-          <input type="checkbox" id="left" name="left" onclick="check('left');" checked>
+          <input type="checkbox" id="left" name="left" onclick="check('left', 0, 1, '#graph', '#res');" checked>
           <label for="left">Left</label>
         </div>
       </div>
