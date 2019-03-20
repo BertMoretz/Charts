@@ -8,23 +8,6 @@
   position: absolute;
 }
 
-.hey {
-  background-color: black;
-  position: absolute;
-  height: 100px;
-  width: 1000px;
-  opacity: 0.2;
-}
-
-.link {
-  background-color: transparent;
-  height: 100px;
-  width: 100px;
-  resize: horizontal;
-  position: absolute;
-  border: 1px solid black;
-}
-
 .resizable {
   background: white;
   width: 100px;
@@ -48,14 +31,14 @@
 .resizable .resizers{
   width: 100%;
   height: 100%;
-  border: 2px solid #383838;
+  border: 3px solid #383838;
   opacity: 0.3;
   box-sizing: border-box;
 }
 
 .resizable .resizers .resizer{
   width: 10px;
-  height: 100%;
+  height: 94%;
   background: white;
   border: 2px solid #383838;
   border-radius: 3px;
@@ -64,15 +47,22 @@
 
 .resizable .resizers .resizer.bottom-left {
   left: -10px;
-  bottom: -2px;
+  bottom: 0px;
   cursor: ew-resize;
 }
 .resizable .resizers .resizer.bottom-right {
   right: -10px;
-  bottom: -2px;
+  bottom: 0px;
   cursor: ew-resize;
 }
 
-.checks {
-
+.chbox {
+  border-radius: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #e6ecf0;
+  display: inline;
+  margin-left: 10px;
 }
