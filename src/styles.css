@@ -4,7 +4,30 @@
   height: 100px;
 }
 
-#res {
+body {
+  /* background-color: #242f3e; */
+}
+
+.switch {
+  position: fixed;
+  right: 30px;
+  font-family: sans-serif;
+  color: #344658;
+}
+
+.switchLight {
+  position: fixed;
+  right: 30px;
+  font-family: sans-serif;
+  color: white;
+  opacity: 0;
+}
+
+.switch:hover {
+  cursor: pointer;
+}
+
+.mini {
   position: absolute;
 }
 
@@ -15,13 +38,14 @@
   position: absolute;
   left: 40px;
   background-color: transparent;
+  cursor: move;
 }
 
 #move {
   cursor: move;
 }
 
-#moveitem {
+.moveitem {
   width: 100px;
   height: 60px;
   position: absolute;
@@ -58,11 +82,10 @@
 
 .chbox {
   border-radius: 25px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 7px;
   border: 1px solid #e6ecf0;
   display: inline;
   margin-left: 10px;
+  color : #43484b;
+  font-family: sans-serif;
 }
