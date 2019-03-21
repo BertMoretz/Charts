@@ -6,6 +6,8 @@ var yPadding = 30;
 var chartWidth = [100,100,100,100,100];
 var chartPlace = [10,10,10,10,10];
 
+var switched = false;
+
 var boxes = [];
 
 // I just put here json, because it cannot be fetched locally and I didn't
@@ -185,7 +187,13 @@ function drawGraph(index, id) {
   c.clearRect(0, 0, 1000, 300);
 
   c.lineWidth = 2;
-  c.strokeStyle = '#f2f4f5';
+  if (switched) {
+    c.strokeStyle = '#293544';
+  }
+  else {
+    c.strokeStyle = '#f2f4f5';
+  }
+   //293544
   c.font = '8pt sans-serif';
   c.textAlign = "center";
   c.fillStyle = "#96a2aa";
@@ -216,6 +224,10 @@ function drawGraph(index, id) {
       c.moveTo(xPadding - 20 , yPoint + 10);
       c.lineTo(graph.width(), yPoint + 10);
       c.stroke();
+  }
+
+  for (var i = 0; i<Object.keys(tg[index].colors).length; i++) {
+    document.getElementById(index + "y" + i).style.borderColor = tg[index].colors["y" + i];
   }
 
   for (var i = 0; i<Object.keys(tg[index].colors).length; i++) {
@@ -268,6 +280,64 @@ function drawMiniature(index, id) {
 
 }
 
+function switchMode() {
+  document.body.style.backgroundColor = '#242f3e';
+  var sw = document.getElementsByClassName('switch')[0];
+  sw.innerHTML = "Switch to Light";
+  sw.style.color = 'white';
+  sw.onclick = function () {switchBack()};
+  switched = true;
+
+  var elems = document.getElementsByClassName("chbox");
+  for (var i = 0; i < elems.length; i++) {
+    elems[i].style.color = "white";
+    elems[i].style.borderColor = "#344658";
+  }
+  loadCharts();
+}
+
+function switchBack() {
+  document.body.style.backgroundColor = 'white';
+  var sw = document.getElementsByClassName('switch')[0];
+  sw.innerHTML = "Switch to Dark";
+  sw.style.color = '#344658';
+  sw.onclick = function () { switchMode();};
+  switched = false;
+
+  var elems = document.getElementsByClassName("chbox");
+  for (var i = 0; i < elems.length; i++) {
+    elems[i].style.color = "#43484b";
+    elems[i].style.borderColor = "#e6ecf0";
+  }
+  loadCharts();
+}
+
+function loadCharts() {
+  drawGraph(0, '#graph');
+  drawMiniature(0, '#res');
+  makeResizableDiv('#move0', 0, '#graph');
+  dragElement(document.getElementById("move0"), 0, '#graph');
+
+  drawGraph(1, '#graph1');
+  drawMiniature(1, '#res1');
+  makeResizableDiv('#move1', 1, '#graph1');
+  dragElement(document.getElementById("move1"), 1, '#graph1');
+
+  drawGraph(2, '#graph2');
+  drawMiniature(2, '#res2');
+  makeResizableDiv('#move2', 2, '#graph2');
+  dragElement(document.getElementById("move2"), 2, '#graph2');
+
+  drawGraph(3, '#graph3');
+  drawMiniature(3, '#res3');
+  makeResizableDiv('#move3', 3, '#graph3');
+  dragElement(document.getElementById("move3"), 3, '#graph3');
+
+  drawGraph(4, '#graph4');
+  drawMiniature(4, '#res4');
+  makeResizableDiv('#move4', 4, '#graph4');
+  dragElement(document.getElementById("move4"), 4, '#graph4');
+}
 
 $(document).ready(function() {
   fetchJson();
