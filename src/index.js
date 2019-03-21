@@ -219,15 +219,21 @@ function drawGraph(index, id) {
   var maximum = getMaxY(index)
   for(var i = 0; i < maximum; i += Math.floor(maximum/5) + 10 -  Math.floor(maximum/5) % 10) {
       var yPoint = getYPixel(i, graph, index);
-      c.fillText(i, xPadding - 5, yPoint);
+      c.fillText(i, xPadding + 15, yPoint);
       c.beginPath();
-      c.moveTo(xPadding - 20 , yPoint + 10);
+      c.moveTo(xPadding  , yPoint + 10);
       c.lineTo(graph.width(), yPoint + 10);
       c.stroke();
   }
 
   for (var i = 0; i<Object.keys(tg[index].colors).length; i++) {
-    document.getElementById(index + "y" + i).style.borderColor = tg[index].colors["y" + i];
+    // document.getElementById(index + "y" + i).style.borderColor = tg[index].colors["y" + i];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = "." + "y" + index + i + " + label:before {content: ' ';margin-right: 10px;display: inline-block;vertical-align: text-top;border-radius: 25px;border: 1px solid  " + tg[index].colors['y' + i] + ";width: 20px;height: 20px;background: white; } ." + "y" + index + i + ":checked + label:before {background: " + tg[index].colors['y' + i] + ";} ." + "y" + index + i + " {position: absolute;opacity: 0;}." + "y" + index + i + " + label {position: relative;cursor: pointer;padding: 0;bottom: 2px;}." + "y" + index + i + ":checked + label:after {content: '';position: absolute;left: 6px;top: 10px;background: white;width: 2px;height: 2px;box-shadow:2px 0 0 white,4px 0 0 white,4px -2px 0 white,4px -4px 0 white,4px -6px 0 white,4px -8px 0 white;transform: rotate(45deg);}";
+    document.getElementsByTagName('head')[0].appendChild(style);
+
+    document.getElementById(index + "y" + i ).className = "y" + index + i;
   }
 
   for (var i = 0; i<Object.keys(tg[index].colors).length; i++) {
